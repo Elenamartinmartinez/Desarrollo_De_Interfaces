@@ -1,16 +1,29 @@
 import java.util.Scanner;
 
-public class Superviviente {
+public class Superviviente implements I_Combate{
     /*ATRIBUTOS*/
+    private final int maxPv = 20;//Vida máx, al curarse solo puede llegar a 20
     private int pv;
+    private int ataque;
     private int armas;
     private int proteccion;
+    private boolean botiquin = false;
 
     /*CONSTRUCTOR*/
+    //Constructor con solo los valores iniciales
     public Superviviente (int pv, int armas, int proteccion) {
         this.pv = 20; //Los atributos que saldrán por defecto
         this.armas = 0;
         this.proteccion = 0;
+    }
+
+    //Constructor con todos los valores
+    public Superviviente (int pv, int ataque, int armas, int proteccion, boolean botiquin) {
+        this.pv = 20; //Los atributos que saldrán por defecto
+        this.ataque = 4;
+        this.armas = 0;
+        this.proteccion = 0;
+        this.botiquin = false;
     }
 
     /*MÉTODOS*/
@@ -20,6 +33,13 @@ public class Superviviente {
     }
     public int getPv() {
         return pv;
+    }
+
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
+    public int getAtaque() {
+        return ataque;
     }
 
     public void setArmas(int armas) {
@@ -36,10 +56,51 @@ public class Superviviente {
         return proteccion;
     }
 
+    public void setBotiquin(boolean botiquin) {
+        this.botiquin = botiquin;
+    }
 
     //Ataque
-    static void atacar () {
-        int lanzamiento = (int) (Math.random() * 4 + 1);
+    public int atacar () {
+        int lanzamiento = ((int) (Math.random() * 4 + 1)) + ataque;
+        return (int) lanzamiento + armas;
+    }
+
+    /*Métodos que implementamos de la clase I_Combatir*/
+    //Recibir daño de ataque
+    @Override
+    public int recibirDanio(int danio) {
+        int danioT = danio - proteccion; //En caso de tener alguna protección, reduce el daño
+        if (danioT < 0) {
+            danioT = 0;
+        }
+
+        this.pv -= danioT;
+        if (pv < 0) {
+            pv = 0; //La vida nunca puede ser menor a 0
+        }
+        return danio;
+    }
+
+    //Estado del superviviente
+    @Override
+    public boolean estado() {
+        return this.pv > 0;
+    }
+
+    //Curarse
+    public void curarse() {
+        //Solo mostramos la opción de curar en caso de que el superviviente tenga botiquín
+        if (this.botiquin) { //Si tiene, puede usarlo aunque la vida este al max
+            this.pv += 4;
+
+            if (this.pv > this.maxPv) {
+                this.pv = this.maxPv; //El jugador es libre de decidir si lo usa o no, pero con vida max no va a pasar de 20pv
+            }
+            this.botiquin = false; //Una vez usado, se elimina el botiquín del inventario
+            System.out.println("¡Te has curado!");
+            System.out.println("Punto de vida actuales: "+this.pv); //Mostramos el pv por pantalla
+        }
     }
 
     //Busqueda
@@ -69,7 +130,7 @@ public class Superviviente {
            System.out.println("Encontramos una protección (+1)");
            //Sumar una de protección
 
-       } else if ((lanzamiento >= 96)&&(lanzamiento <= 100)) {
+       } else {
            System.out.println("Encontramos un arma (+1)");
        }
     }

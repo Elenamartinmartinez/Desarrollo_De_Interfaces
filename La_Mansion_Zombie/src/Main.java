@@ -10,9 +10,10 @@ public class Main {
         do { //Repetimos la pregunta mientras que la opción no sea válida
             System.out.println("OPCIONES DE DIFICULTAD:");
             System.out.println("1.FÁCIL (5 habitaciones)");
-            System.out.println("2.DIFÍCIL (10 habitaciones)");
+            System.out.println("2.0" +
+                    "DIFÍCIL (10 habitaciones)");
             System.out.println("----------------------------------------------------------------------------------------");
-            System.out.println("> OPCIÓN: ");
+            System.out.print("> OPCIÓN: ");
             op = sc.nextInt();
         } while ((op < 1)||(op > 2));
 
