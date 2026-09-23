@@ -10,14 +10,14 @@ public class Superviviente implements I_Combate{
     private boolean botiquin = false;
 
     /*CONSTRUCTOR*/
-    //Constructor con solo los valores iniciales
+    //Con solo los valores iniciales
     public Superviviente (int pv, int armas, int proteccion) {
         this.pv = 20; //Los atributos que saldrán por defecto
         this.armas = 0;
         this.proteccion = 0;
     }
 
-    //Constructor con todos los valores
+    //Con todos los valores
     public Superviviente (int pv, int ataque, int armas, int proteccion, boolean botiquin) {
         this.pv = 20; //Los atributos que saldrán por defecto
         this.ataque = 4;
@@ -61,6 +61,7 @@ public class Superviviente implements I_Combate{
     }
 
     //Ataque
+    @Override
     public int atacar () {
         int lanzamiento = ((int) (Math.random() * 4 + 1)) + ataque;
         return (int) lanzamiento + armas;
@@ -85,7 +86,7 @@ public class Superviviente implements I_Combate{
     //Estado del superviviente
     @Override
     public boolean estado() {
-        return this.pv > 0;
+        return this.pv > 0; //Si el pv es mayor a 0, el superviviente sigue vivo
     }
 
     //Curarse
@@ -104,6 +105,7 @@ public class Superviviente implements I_Combate{
     }
 
     //Busqueda
+    /*
     static void laBusqueda () {
         Scanner sc = new Scanner(System.in);
         int lanzamiento = (int) (Math.random() * 100 + 1);
@@ -134,6 +136,7 @@ public class Superviviente implements I_Combate{
            System.out.println("Encontramos un arma (+1)");
        }
     }
+    */
 
     //Mostramos la información del superviviente por pantalla
     @Override

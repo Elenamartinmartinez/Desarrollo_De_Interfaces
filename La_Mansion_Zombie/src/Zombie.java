@@ -1,4 +1,8 @@
+import java.util.*;
+
 public class Zombie implements I_Combate{
+    static Scanner sc = new Scanner (System.in);
+
     Habitacion h = new Habitacion(0,0,0);
     /*ATRIBUTOS*/
     int pv; //<- num aleatorio (0-1) + 2 + (habitación - 1)
@@ -14,7 +18,8 @@ public class Zombie implements I_Combate{
     /*MÉTODOS*/
     //Atacar
     public int atacar () {
-        return 0;
+        int lanzamiento = ((int) (Math.random() * 4 + 1)) + ataque;
+        return lanzamiento;
     }
 
     /*Métodos que implementamos desde la clase I_Combatir*/
@@ -39,12 +44,12 @@ public class Zombie implements I_Combate{
 
     @Override
     public int getPv() {
-        return 0;
+        return this.pv;
     }
 
     @Override
     public int getAtaque() {
-        return 0;
+        return this.ataque;
     }
 
 
