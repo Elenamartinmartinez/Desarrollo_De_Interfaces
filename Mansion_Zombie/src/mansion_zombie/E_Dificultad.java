@@ -1,3 +1,5 @@
+package mansion_zombie;
+
 public enum E_Dificultad {
     FACIL (5),
     DIFICIL (10);

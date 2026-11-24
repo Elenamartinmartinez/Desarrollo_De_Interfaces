@@ -1,8 +1,10 @@
+package mansion_zombie;
+
 import java.util.Scanner;
 
 public class Superviviente implements I_Combate{
     /*ATRIBUTOS*/
-    private final int maxPv = 20;//Vida mÃ¡x, al curarse solo puede llegar a 20
+    private final int maxPv = 20;//Vida máx, al curarse solo puede llegar a 20
     private int pv;
     private int ataque;
     private int armas;
@@ -12,21 +14,21 @@ public class Superviviente implements I_Combate{
     /*CONSTRUCTOR*/
     //Con solo los valores iniciales
     public Superviviente (int pv, int armas, int proteccion) {
-        this.pv = 20; //Los atributos que saldrÃ¡n por defecto
+        this.pv = 20; //Los atributos que saldrán por defecto
         this.armas = 0;
         this.proteccion = 0;
     }
 
     //Con todos los valores
     public Superviviente (int pv, int ataque, int armas, int proteccion, boolean botiquin) {
-        this.pv = 20; //Los atributos que saldrÃ¡n por defecto
+        this.pv = 20; //Los atributos que saldrán por defecto
         this.ataque = 4;
         this.armas = 0;
         this.proteccion = 0;
         this.botiquin = false;
     }
 
-    /*MÃ‰TODOS*/
+    /*MÉTODOS*/
     //Getters y Setters para los atributos
     public void setPv(int pv) {
         this.pv = 20;
@@ -67,11 +69,11 @@ public class Superviviente implements I_Combate{
         return (int) lanzamiento + armas;
     }
 
-    /*MÃ©todos que implementamos de la clase I_Combatir*/
-    //Recibir daÃ±o de ataque
+    /*Métodos que implementamos de la clase I_Combatir*/
+    //Recibir daño de ataque
     @Override
     public int recibirDanio(int danio) {
-        int danioT = danio - proteccion; //En caso de tener alguna protecciÃ³n, reduce el daÃ±o
+        int danioT = danio - proteccion; //En caso de tener alguna protección, reduce el daño
         if (danioT < 0) {
             danioT = 0;
         }
@@ -91,15 +93,15 @@ public class Superviviente implements I_Combate{
 
     //Curarse
     public void curarse() {
-        //Solo mostramos la opciÃ³n de curar en caso de que el superviviente tenga botiquÃ­n
+        //Solo mostramos la opción de curar en caso de que el superviviente tenga botiquín
         if (this.botiquin) { //Si tiene, puede usarlo aunque la vida este al max
             this.pv += 4;
 
             if (this.pv > this.maxPv) {
                 this.pv = this.maxPv; //El jugador es libre de decidir si lo usa o no, pero con vida max no va a pasar de 20pv
             }
-            this.botiquin = false; //Una vez usado, se elimina el botiquÃ­n del inventario
-            System.out.println("Â¡Te has curado!");
+            this.botiquin = false; //Una vez usado, se elimina el botiquín del inventario
+            System.out.println("¡Te has curado!");
             System.out.println("Punto de vida actuales: "+this.pv); //Mostramos el pv por pantalla
         }
     }
@@ -115,22 +117,22 @@ public class Superviviente implements I_Combate{
 
        //Dependiendo del resultado
        if (lanzamiento <= 75) { //Entre 1-75
-           System.out.println("Â¡Has hecho ruido!, Â¡Cuidado!...");
+           System.out.println("¡Has hecho ruido!, ¡Cuidado!...");
            int l = (int) (Math.random() * 100 + 1); //Volvemos a lanzar los dados
             if (l <= 40){
                 System.out.println("No ha pasdo nada");
             } else if ((l <= 80)&&(l >= 41)) {
-                System.out.println("+1 Zombie en la habitaciÃ³n");
+                System.out.println("+1 Zombie en la habitación");
             } else if ((l >= 81)&&(l <= 100)) {
-                System.out.println("+2 Zombies en la habitaciÃ³n");
+                System.out.println("+2 Zombies en la habitación");
             }
 
        } else if ((lanzamiento >= 76)&&(lanzamiento <= 90)) {
-           System.out.println("!Has encontrado un botiquÃ­nÂ¡");
+           System.out.println("!Has encontrado un botiquín¡");
 
        } else if ((lanzamiento >= 91)&&(lanzamiento <= 95)) {
-           System.out.println("Encontramos una protecciÃ³n (+1)");
-           //Sumar una de protecciÃ³n
+           System.out.println("Encontramos una protección (+1)");
+           //Sumar una de protección
 
        } else {
            System.out.println("Encontramos un arma (+1)");
@@ -138,9 +140,9 @@ public class Superviviente implements I_Combate{
     }
     */
 
-    //Mostramos la informaciÃ³n del superviviente por pantalla
+    //Mostramos la información del superviviente por pantalla
     @Override
     public String toString() {
-        return "** PV: "+pv+" || ARMAS: "+armas+" || PROTECCIÃ“N: "+proteccion;
+        return "** PV: "+pv+" || ARMAS: "+armas+" || PROTECCIÓN: "+proteccion;
     }
 }

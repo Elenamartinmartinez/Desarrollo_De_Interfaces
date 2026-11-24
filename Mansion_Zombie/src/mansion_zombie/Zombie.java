@@ -1,3 +1,5 @@
+package mansion_zombie;
+
 import java.util.*;
 
 public class Zombie implements I_Combate{
@@ -5,8 +7,8 @@ public class Zombie implements I_Combate{
 
     Habitacion h = new Habitacion(0,0,0);
     /*ATRIBUTOS*/
-    int pv; //<- num aleatorio (0-1) + 2 + (habitaciÃ³n - 1)
-    int ataque; //<- num aleatorio (0-1) + 2 + (habitaciÃ³n - 1)
+    int pv; //<- num aleatorio (0-1) + 2 + (habitación - 1)
+    int ataque; //<- num aleatorio (0-1) + 2 + (habitación - 1)
 
     /*CONSTRUCOTR*/
     //Todos sus atributos se crean de manera aleatoria
@@ -15,17 +17,17 @@ public class Zombie implements I_Combate{
         this.ataque = (int) (Math.random() * 2 + 1) + (h.numHabitacion - 1);
     }
 
-    /*MÃ‰TODOS*/
+    /*MÉTODOS*/
     //Atacar
     public int atacar () {
         int lanzamiento = ((int) (Math.random() * 4 + 1)) + ataque;
         return lanzamiento;
     }
 
-    /*MÃ©todos que implementamos desde la clase I_Combatir*/
+    /*Métodos que implementamos desde la clase I_Combatir*/
     @Override
     public int recibirDanio(int danio) {
-        int danioT = danio; //El zombie no tiene protecciÃ³n, no se reduce el daÃ±o que se le haga
+        int danioT = danio; //El zombie no tiene protección, no se reduce el daño que se le haga
         if (danioT < 0) {
             danioT = 0;
         }

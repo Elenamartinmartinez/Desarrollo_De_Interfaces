@@ -1,3 +1,5 @@
+package mansion_zombie;
+
 import java.util.*;
 
 public class Main {
@@ -5,12 +7,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("----------------------------------------------------------------------------------------");
-        System.out.println("BIENVENIDO A LA MANSI√ìN ZOMBIE");
+        System.out.println("BIENVENIDO A LA MANSI”N ZOMBIE");
         int op;
-        do { //Repetimos la pregunta mientras que la opci√≥n no sea v√°lida
+        do { //Repetimos la pregunta mientras que la opciÛn no sea v·lida
             mostrarDificultades();
             System.out.println("----------------------------------------------------------------------------------------");
-            System.out.print("> OPCI√ìN: ");
+            System.out.print("> OPCI”N: ");
             op = sc.nextInt();
         } while ((op < 1)||(op > 2));
 
@@ -30,42 +32,42 @@ public class Main {
 
         Habitacion h = new Habitacion(0, 0, 0);
         System.out.println(h);
-        //N√∫mero de Zombies en la habitaci√≥n
+        //N˙mero de Zombies en la habitaciÛn
 
 
     }
 
-    /*M√©todos que llamar√° el main*/
+    /*MÈtodos que llamar· el main*/
     static void mostrarDificultades () {
         System.out.println("OPCIONES DE DIFICULTAD:");
-        System.out.println("1.- F√ÅCIL (5 habitaciones)");
-        System.out.println("2.- DIF√çCIL (10 habitaciones)");
+        System.out.println("1.- F¡CIL (5 habitaciones)");
+        System.out.println("2.- DIFÕCIL (10 habitaciones)");
     }
 
     /*
-    //Men√∫ de opciones para cada habitaci√≥n
+    //Men˙ de opciones para cada habitaciÛn
     static void mostrarMenu () {
         System.out.println("*** ELIGE UNA DE LAS SIGUIENTES ACCIONES:");
 
-        //Si hay zombies en la habitaci√≥n, solo se puede pelear
+        //Si hay zombies en la habitaciÛn, solo se puede pelear
         if (true) {
             System.out.println("1.- COMBATIR CONTRA UN ZOMBIE");
         }
     }
 
-    //Generar aleatoriamente cada habitaci√≥n
+    //Generar aleatoriamente cada habitaciÛn
     static void generarHabitacion () {
-        System.out.println("HABITACI√ìN: ");
-        System.out.println("*** LA HABITACI√ìN CONTIENE: "+3+" ZOMBIES");
+        System.out.println("HABITACI”N: ");
+        System.out.println("*** LA HABITACI”N CONTIENE: "+3+" ZOMBIES");
         System.out.println("");
     }
 
-    //Generamos un zombie y mostramos su informaci√≥n
+    //Generamos un zombie y mostramos su informaciÛn
     static void infoZombie (Zombie zombie) {
         zombie = new Zombie(0, 0);
     }
 
-    System.out.println("** LA HABITACI√ìN CONTIENE: "+(int) (Math.random()*2+1)+" ZOMBIES"); //<- N√∫meros de Zombies de la habitaci√≥n
+    System.out.println("** LA HABITACI”N CONTIENE: "+(int) (Math.random()*2+1)+" ZOMBIES"); //<- N˙meros de Zombies de la habitaciÛn
     */
 
 }

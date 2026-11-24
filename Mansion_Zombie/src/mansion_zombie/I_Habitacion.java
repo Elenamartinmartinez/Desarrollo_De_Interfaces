@@ -1,3 +1,5 @@
+package mansion_zombie;
+
 public interface I_Habitacion {
     int getNumHabitacion();
     int getNumZombie();

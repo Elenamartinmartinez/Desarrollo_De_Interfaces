@@ -1,3 +1,5 @@
+package mansion_zombie;
+
 public interface I_Combate {
     int atacar();
     int recibirDanio (int danio);

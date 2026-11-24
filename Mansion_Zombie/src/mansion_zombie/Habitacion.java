@@ -1,3 +1,5 @@
+package mansion_zombie;
+
 public class Habitacion implements I_Habitacion{
     /*ATRIBUTOS*/
     int numHabitacion;
@@ -8,12 +10,12 @@ public class Habitacion implements I_Habitacion{
     //Constructor con los valores iniciales de cada atributo
     public Habitacion (int numHabitacion, int numZombies, int intBusqueda) {
         this.numHabitacion = 1;
-        this.numZombies = (int) (Math.random()*2); //Como mÃ¡x pueden haber 2 Zombies al mismo tiempo
+        this.numZombies = (int) (Math.random()*2); //Como máx pueden haber 2 Zombies al mismo tiempo
         this.intBusqueda = 3;
     }
 
 
-    /*MÃ‰TODOS*/
+    /*MÉTODOS*/
     //Busqueda (solo si no hay zombies)
     static void realizarBusqueda () {
 
@@ -24,12 +26,12 @@ public class Habitacion implements I_Habitacion{
 
     }
 
-    //Preparar la siguiente habitaciÃ³n
+    //Preparar la siguiente habitación
     public void prepararHabitacion () {
 
     }
 
-    /*MÃ©todos que implementamos desde la clase I_Habitacion*/
+    /*Métodos que implementamos desde la clase I_Habitacion*/
     @Override
     public int getNumHabitacion() { //Tener en cuenta que dependiendo de la dificultad pueden ser 5 o 10
         if (true) { //Dificultad baja
@@ -41,7 +43,7 @@ public class Habitacion implements I_Habitacion{
     }
 
     @Override
-    public int getNumZombie() { //Solo se pueden tener como mÃ¡x 2 zombies al mismo tiempo
+    public int getNumZombie() { //Solo se pueden tener como máx 2 zombies al mismo tiempo
 
         return 0;
     }
@@ -52,7 +54,7 @@ public class Habitacion implements I_Habitacion{
     }
 
     @Override
-    public void agregarZ() { //Si se hace ruido y hay mala suerte, se suma x nÃºmero de zombies
+    public void agregarZ() { //Si se hace ruido y hay mala suerte, se suma x número de zombies
 
     }
 
@@ -66,6 +68,6 @@ public class Habitacion implements I_Habitacion{
     //Mostrar por pantalla los datos de la sala
     @Override
     public String toString() {
-        return "*** [NÂºHABITACIÃ“N: "+numHabitacion+" || ZOMBIES ACTIVOS: "+numZombies+" || INTENTOS DE BÃšSQUEDA: "+intBusqueda+"]";
+        return "*** [NºHABITACIÓN: "+numHabitacion+" || ZOMBIES ACTIVOS: "+numZombies+" || INTENTOS DE BÚSQUEDA: "+intBusqueda+"]";
     }
 }
