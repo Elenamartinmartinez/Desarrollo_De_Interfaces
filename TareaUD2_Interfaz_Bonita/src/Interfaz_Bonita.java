@@ -29,10 +29,41 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
         TxtNombre.setText("Ingrese su nombre de usuario");
         TxtNombre.setForeground(java.awt.Color.GRAY);
 
-    // Texto por defecto de la contraseña (sin asteriscos)
+        // Texto por defecto de la contraseña (sin asteriscos)
         PwdClave.setEchoChar((char) 0);
         PwdClave.setText("Ingrese su contraseña");
         PwdClave.setForeground(java.awt.Color.GRAY);
+        
+        BtnIncio.setOpaque(true);
+        BtnIncio.setContentAreaFilled(true);
+        
+        camposValidos();
+    }
+    
+    //Variables para controlar la X e Y de la localización de la ventana
+    private int x;
+    private int y;
+    
+    //Validación de los campos de usuario y contraseña para que el usuario pueda o no darle al botón de inicio
+    private void camposValidos() {
+        //Variables para el nombre y contraseña
+        String usuario = TxtNombre.getText().trim();
+        String clave = String.valueOf(PwdClave.getPassword()).trim();
+        
+        //para mostrar true o false en caso de que los campos estén llenos o no
+        boolean usuarioValido = !usuario.isEmpty() && !usuario.equals("Ingrese su nombre de usuario");
+        boolean claveValida = !clave.isEmpty() && !clave.equals("Ingrese su contraseña");
+        
+        //En caso de que AMBOS campos estén rellenados
+        if (usuarioValido && claveValida) { //En caso de que los campos estén rellenados
+            BtnIncio.setEnabled(true);
+            BtnIncio.setBackground(new java.awt.Color(255, 51, 102));
+            BtnIncio.setForeground(java.awt.Color.WHITE);
+        } else {
+            BtnIncio.setEnabled(false);
+            BtnIncio.setBackground(java.awt.Color.GRAY);
+            BtnIncio.setForeground(java.awt.Color.LIGHT_GRAY);
+        }
     }
 
     /**
@@ -72,6 +103,11 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.PAGE_AXIS));
 
         PnlBarraArriba.setBackground(new java.awt.Color(0, 0, 0));
+        PnlBarraArriba.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                PnlBarraArribaMouseDragged(evt);
+            }
+        });
         PnlBarraArriba.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 PnlBarraArribaMousePressed(evt);
@@ -125,6 +161,11 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
                 TxtNombreFocusLost(evt);
             }
         });
+        TxtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TxtNombreKeyReleased(evt);
+            }
+        });
 
         PwdClave.setBackground(new java.awt.Color(255, 192, 255));
         PwdClave.setText("jPasswordField1");
@@ -135,6 +176,11 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
                 PwdClaveFocusLost(evt);
+            }
+        });
+        PwdClave.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                PwdClaveKeyReleased(evt);
             }
         });
 
@@ -232,16 +278,14 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
         PnlDerechoLayout.setHorizontalGroup(
             PnlDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlDerechoLayout.createSequentialGroup()
-                .addContainerGap(60, Short.MAX_VALUE)
-                .addGroup(PnlDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlDerechoLayout.createSequentialGroup()
-                        .addComponent(LblImgLateral)
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlDerechoLayout.createSequentialGroup()
-                        .addGroup(PnlDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(LblGamers)
-                            .addComponent(LblParadise))
-                        .addGap(60, 60, 60))))
+                .addContainerGap(157, Short.MAX_VALUE)
+                .addGroup(PnlDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(LblGamers)
+                    .addComponent(LblParadise))
+                .addGap(60, 60, 60))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlDerechoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(LblImgLateral, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         PnlDerechoLayout.setVerticalGroup(
             PnlDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,8 +294,8 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblParadise, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(70, 70, 70)
-                .addComponent(LblImgLateral)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addComponent(LblImgLateral, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPanel1.add(PnlDerecho);
@@ -305,13 +349,14 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
     }//GEN-LAST:event_PwdClaveFocusLost
 
     private void BtnIncioMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnIncioMouseEntered
-        BtnIncio.setBackground(java.awt.Color.WHITE);
-        BtnIncio.setForeground(new java.awt.Color(255, 51, 102));
+        if (BtnIncio.isEnabled()) {
+            BtnIncio.setBackground(java.awt.Color.WHITE);
+            BtnIncio.setForeground(new java.awt.Color(255, 51, 102));
+        }
     }//GEN-LAST:event_BtnIncioMouseEntered
 
     private void BtnIncioMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BtnIncioMouseExited
-        BtnIncio.setBackground(new java.awt.Color(255, 51, 102));
-        BtnIncio.setForeground(java.awt.Color.WHITE);
+        camposValidos();
     }//GEN-LAST:event_BtnIncioMouseExited
 
     private void LblSalirMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblSalirMousePressed
@@ -327,8 +372,24 @@ public class Interfaz_Bonita extends javax.swing.JFrame {
     }//GEN-LAST:event_LblSalirMouseExited
 
     private void PnlBarraArribaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PnlBarraArribaMousePressed
-        // TODO add your handling code here:
+        x = evt.getX();
+        y = evt.getY();
     }//GEN-LAST:event_PnlBarraArribaMousePressed
+
+    private void TxtNombreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TxtNombreKeyReleased
+        camposValidos();
+    }//GEN-LAST:event_TxtNombreKeyReleased
+
+    private void PwdClaveKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PwdClaveKeyReleased
+        camposValidos();
+    }//GEN-LAST:event_PwdClaveKeyReleased
+
+    private void PnlBarraArribaMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PnlBarraArribaMouseDragged
+        int x1 = evt.getXOnScreen();
+        int y1 = evt.getYOnScreen();
+        
+        this.setLocation(x1 - x, y1 - y);
+    }//GEN-LAST:event_PnlBarraArribaMouseDragged
 
     /**
      * @param args the command line arguments
