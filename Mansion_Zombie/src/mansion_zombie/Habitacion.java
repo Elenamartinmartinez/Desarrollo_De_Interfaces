@@ -1,73 +1,73 @@
 package mansion_zombie;
 
-public class Habitacion implements I_Habitacion{
-    /*ATRIBUTOS*/
-    int numHabitacion;
-    int numZombies;
-    int intBusqueda;
+public class Habitacion implements I_Habitacion {
 
-    /*CONSTRUCTOR*/
-    //Constructor con los valores iniciales de cada atributo
-    public Habitacion (int numHabitacion, int numZombies, int intBusqueda) {
-        this.numHabitacion = 1;
-        this.numZombies = (int) (Math.random()*2); //Como máx pueden haber 2 Zombies al mismo tiempo
-        this.intBusqueda = 3;
-    }
+    private static final int INTENTOS_INICIALES = 3;
+    private int numHabitacion = 1;
+    private int numZombies = 1;
+    private int intentosBusqueda = INTENTOS_INICIALES;
 
-
-    /*MÉTODOS*/
-    //Busqueda (solo si no hay zombies)
-    static void realizarBusqueda () {
-
-    }
-
-    //Reducir los intentos (solo 3) y mostrar los intentos restantes
-    static void reducirIntentos () {
-
-    }
-
-    //Preparar la siguiente habitación
-    public void prepararHabitacion () {
-
-    }
-
-    /*Métodos que implementamos desde la clase I_Habitacion*/
-    @Override
-    public int getNumHabitacion() { //Tener en cuenta que dependiendo de la dificultad pueden ser 5 o 10
-        if (true) { //Dificultad baja
-
-        } else  if (true) { //Dificultad alta
-
+    public E_Busqueda realizarBusqueda() {
+        intentosBusqueda--;//Resta los intentos del jugador
+        int tirada = (int) (Math.random() * 100) + 1;//El dado da números aleatorios
+        if (tirada <= 75) {
+            return E_Busqueda.RUIDO;
         }
-        return 0;
+        if (tirada <= 90) {
+            return E_Busqueda.BOTIQUIN;
+        }
+        if (tirada <= 95) {
+            return E_Busqueda.PROTECCION;
+        }
+        return E_Busqueda.ARMA;
+    }
+
+    //En caso de que el jugador haya hecho ruido, tiene una segunda oportunidad para
+    //no invocar zombies
+    public int resolverRuido() {
+        int tirada = (int) (Math.random() * 100) + 1;
+        int nuevos = tirada <= 40 ? 0 : (tirada <= 80 ? 1 : 2);//Si la tirada es inferior a 40, se invoca un número de zombies (como máx 2)
+        numZombies += nuevos; //Añade los zombies nuevos
+        return nuevos;
+    }
+
+    //Se crea nueva información para cada habitación
+    @Override
+    public void prepararHabitacion() {
+        numHabitacion++;
+        numZombies = 1; //Realmente el mínimo son 0 zombies, de momento dejar así
+        intentosBusqueda = INTENTOS_INICIALES;
     }
 
     @Override
-    public int getNumZombie() { //Solo se pueden tener como máx 2 zombies al mismo tiempo
+    public int getNumHabitacion() {
+        return numHabitacion;
+    }
 
-        return 0;
+    @Override
+    public int getNumZombie() {
+        return numZombies;
     }
 
     @Override
     public int getIntentosRestantes() {
-        return 0;
+        return intentosBusqueda;
     }
 
     @Override
-    public void agregarZ() { //Si se hace ruido y hay mala suerte, se suma x número de zombies
-
+    public void agregarZ() {
+        numZombies++;
     }
 
     @Override
-    public void eliminarZ() { //En caso de que la vida del zombie llegue a 0
-
+    public void eliminarZ() {
+        if (numZombies > 0) {
+            numZombies--;
+        }
     }
 
-
-
-    //Mostrar por pantalla los datos de la sala
     @Override
     public String toString() {
-        return "*** [NºHABITACIÓN: "+numHabitacion+" || ZOMBIES ACTIVOS: "+numZombies+" || INTENTOS DE BÚSQUEDA: "+intBusqueda+"]";
+        return "** LA HABITACIÓN CONTIENE: " + numZombies + " ZOMBIES.";
     }
 }
